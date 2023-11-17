@@ -11,7 +11,9 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "RESULT")
+@Table(name = "RESULT", uniqueConstraints = {
+        @UniqueConstraint(name = "RESULT_UC", columnNames = {"COURSE_ID", "STUDENT_ID"})
+})
 public class Result {
 
     @Id
