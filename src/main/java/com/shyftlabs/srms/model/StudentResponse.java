@@ -9,9 +9,7 @@ import java.time.LocalDate;
 @Builder
 public class StudentResponse {
 
-    private String firstName;
-
-    private String familyName;
+    private String name;
 
     private LocalDate dateOfBirth;
 
