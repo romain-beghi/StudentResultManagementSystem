@@ -43,6 +43,7 @@ public class StudentService {
         studentRepository.save(student);
     }
 
+    @Transactional
     public void deleteStudent(final UUID uuid) {
         studentRepository.deleteById(uuid);
     }
