@@ -1,7 +1,7 @@
 package com.shyftlabs.srms.controller;
 
-import com.shyftlabs.srms.jpa.entity.Course;
 import com.shyftlabs.srms.model.CourseRequest;
+import com.shyftlabs.srms.model.CourseResponse;
 import com.shyftlabs.srms.service.CourseService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ public class CourseController {
 
     @GetMapping("/")
     @ResponseStatus(HttpStatus.OK)
-    public List<Course> getStudents() {
+    public List<CourseResponse> getStudents() {
         return courseService.getAllCourses();
     }
 

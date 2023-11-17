@@ -3,6 +3,7 @@ package com.shyftlabs.srms.service;
 import com.shyftlabs.srms.jpa.entity.Course;
 import com.shyftlabs.srms.jpa.repository.CourseRepository;
 import com.shyftlabs.srms.model.CourseRequest;
+import com.shyftlabs.srms.model.CourseResponse;
 import com.shyftlabs.srms.utils.exception.SrmsException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -18,8 +19,13 @@ public class CourseService {
     private final CourseRepository courseRepository;
 
     @Transactional
-    public List<Course> getAllCourses() {
-        return courseRepository.findAllByOrderByName().toList();
+    public List<CourseResponse> getAllCourses() {
+        return courseRepository.findAllByOrderByName()
+                .map(course -> CourseResponse.builder()
+                        .id(course.getId())
+                        .name(course.getName())
+                        .build())
+                .toList();
     }
 
     public Course getCourse(final UUID uuid) {

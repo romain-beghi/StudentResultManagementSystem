@@ -10,6 +10,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.Instant;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -36,6 +38,9 @@ public class Student {
     @Column(name = "EMAIL", nullable = false)
     private String email;
 
+    @OneToMany(mappedBy = "student", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private Set<Result> resultSet = new HashSet<>();
+
     @Column(name = "CREATED", nullable = false, updatable = false)
     @CreatedDate
     private Instant created;
@@ -45,6 +50,6 @@ public class Student {
      */
 
     public String getFullName() {
-        return StringUtils.joinWith(StringUtils.SPACE, this.getFirstName(), this.getFamilyName());
+        return StringUtils.joinWith(StringUtils.SPACE, getFirstName(), getFamilyName());
     }
 }

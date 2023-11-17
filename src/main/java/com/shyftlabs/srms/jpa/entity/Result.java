@@ -20,11 +20,11 @@ public class Result {
     @GeneratedValue
     private UUID id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "COURSE_ID")
     private Course course;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "STUDENT_ID")
     private Student student;
 

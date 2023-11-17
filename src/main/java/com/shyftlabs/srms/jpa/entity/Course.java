@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -20,4 +22,7 @@ public class Course {
 
     @Column(name = "NAME", nullable = false)
     private String name;
+
+    @OneToMany(mappedBy = "course", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private Set<Result> resultSet = new HashSet<>();
 }
