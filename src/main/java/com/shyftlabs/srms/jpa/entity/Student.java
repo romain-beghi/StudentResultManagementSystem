@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -38,4 +39,12 @@ public class Student {
     @Column(name = "CREATED", nullable = false, updatable = false)
     @CreatedDate
     private Instant created;
+
+    /*
+     * UTILITIES
+     */
+
+    public String getFullName() {
+        return StringUtils.joinWith(StringUtils.SPACE, this.getFirstName(), this.getFamilyName());
+    }
 }

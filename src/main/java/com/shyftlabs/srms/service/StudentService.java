@@ -7,7 +7,6 @@ import com.shyftlabs.srms.model.StudentResponse;
 import com.shyftlabs.srms.utils.tools.TimeUtils;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,7 +23,7 @@ public class StudentService {
         return studentRepository.findAllByOrderByCreatedAsc()
                 .map(student -> StudentResponse.builder()
                         .id(student.getId())
-                        .name(StringUtils.joinWith(StringUtils.SPACE,student.getFirstName(), student.getFamilyName()))
+                        .name(student.getFullName())
                         .dateOfBirth(student.getDateOfBirth())
                         .email(student.getEmail())
                         .build()
