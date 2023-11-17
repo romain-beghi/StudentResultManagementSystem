@@ -1,6 +1,8 @@
 package com.shyftlabs.srms.service;
 
+import com.shyftlabs.srms.jpa.entity.Result;
 import com.shyftlabs.srms.jpa.repository.ResultRepository;
+import com.shyftlabs.srms.model.ResultRequest;
 import com.shyftlabs.srms.model.ResultResponse;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +13,10 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ResultService {
+
+    private final CourseService courseService;
+
+    private final StudentService studentService;
 
     private final ResultRepository resultRepository;
 
@@ -24,5 +30,15 @@ public class ResultService {
                         .build()
                 )
                 .toList();
+    }
+
+    @Transactional
+    public void createResult(final ResultRequest resultRequest) {
+        final Result result = new Result();
+        result.setCourse(courseService.getCourse(resultRequest.getCourseId()));
+        result.setStudent(studentService.getStudent(resultRequest.getStudentId()));
+        result.setGrade(resultRequest.getGrade());
+
+        resultRepository.save(result);
     }
 }

@@ -26,7 +26,7 @@ public class Result {
     @JoinColumn(name = "STUDENT_ID")
     private Student student;
 
-    @Column(name = "GRADE", length = 1, nullable = false)
+    @Column(name = "GRADE", length = 5, nullable = false)
     @Enumerated(EnumType.STRING)
     private Grade grade;
 }

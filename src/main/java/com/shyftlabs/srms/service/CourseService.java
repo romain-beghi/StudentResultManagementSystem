@@ -3,6 +3,7 @@ package com.shyftlabs.srms.service;
 import com.shyftlabs.srms.jpa.entity.Course;
 import com.shyftlabs.srms.jpa.repository.CourseRepository;
 import com.shyftlabs.srms.model.CourseRequest;
+import com.shyftlabs.srms.utils.exception.SrmsException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,11 @@ public class CourseService {
     @Transactional
     public List<Course> getAllCourses() {
         return courseRepository.findAllByOrderByName().toList();
+    }
+
+    public Course getCourse(final UUID uuid) {
+        return courseRepository.findById(uuid)
+                .orElseThrow(() -> new SrmsException("No course found"));
     }
 
     @Transactional

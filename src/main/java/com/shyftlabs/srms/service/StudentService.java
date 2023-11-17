@@ -4,6 +4,7 @@ import com.shyftlabs.srms.jpa.entity.Student;
 import com.shyftlabs.srms.jpa.repository.StudentRepository;
 import com.shyftlabs.srms.model.StudentRequest;
 import com.shyftlabs.srms.model.StudentResponse;
+import com.shyftlabs.srms.utils.exception.SrmsException;
 import com.shyftlabs.srms.utils.tools.TimeUtils;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,11 @@ public class StudentService {
                         .build()
                 )
                 .toList();
+    }
+
+    public Student getStudent(final UUID uuid) {
+        return studentRepository.findById(uuid)
+                .orElseThrow(() -> new SrmsException("No student found"));
     }
 
     @Transactional
