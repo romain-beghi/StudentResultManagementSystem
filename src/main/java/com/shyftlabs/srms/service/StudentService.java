@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -22,9 +23,10 @@ public class StudentService {
     public List<StudentResponse> getAllStudents() {
         return studentRepository.findAllByOrderByCreatedAsc()
                 .map(student -> StudentResponse.builder()
-                            .name(StringUtils.joinWith(StringUtils.SPACE,student.getFirstName(), student.getFamilyName()))
-                            .dateOfBirth(student.getDateOfBirth())
-                            .email(student.getEmail())
+                        .id(student.getId())
+                        .name(StringUtils.joinWith(StringUtils.SPACE,student.getFirstName(), student.getFamilyName()))
+                        .dateOfBirth(student.getDateOfBirth())
+                        .email(student.getEmail())
                         .build()
                 )
                 .toList();
@@ -39,5 +41,9 @@ public class StudentService {
         student.setEmail(studentRequest.getEmail());
 
         studentRepository.save(student);
+    }
+
+    public void deleteStudent(final UUID uuid) {
+        studentRepository.deleteById(uuid);
     }
 }

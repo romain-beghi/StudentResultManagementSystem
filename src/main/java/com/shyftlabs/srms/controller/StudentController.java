@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Validated
 @RestController
@@ -27,7 +28,13 @@ public class StudentController {
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void createCompensationRequest(@RequestBody @Valid final StudentRequest studentRequest) {
+    public void createStudent(@RequestBody @Valid final StudentRequest studentRequest) {
         studentService.createStudent(studentRequest);
+    }
+
+    @DeleteMapping("/{uuid}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void deleteStudent(@PathVariable final UUID uuid) {
+        studentService.deleteStudent(uuid);
     }
 }
