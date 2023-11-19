@@ -35,7 +35,7 @@ const StudentEdit = () => {
             body: JSON.stringify(student)
         });
         setStudent(initialFormState);
-        navigate('/students/new');
+        navigate('/students/');
     }
 
     const title = <h2>Add Student</h2>;

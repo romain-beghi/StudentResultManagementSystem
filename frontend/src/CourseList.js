@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Button, ButtonGroup, Container, Table} from 'reactstrap';
+import {Link} from "react-router-dom";
 import AppNavbar from './AppNavbar';
 
 const CourseList = () => {
@@ -51,6 +52,9 @@ const CourseList = () => {
             <AppNavbar/>
             <Container fluid>
                 <h3>Course List</h3>
+                <div className="float-end">
+                    <Button color="success" tag={Link} to="/courses/new">Add Course</Button>
+                </div>
                 <Table className="mt-4">
                     <thead>
                     <tr>

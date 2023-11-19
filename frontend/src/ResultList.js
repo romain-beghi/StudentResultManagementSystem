@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {Container, Table} from 'reactstrap';
+import {Button, Container, Table} from 'reactstrap';
+import {Link} from "react-router-dom";
 import AppNavbar from './AppNavbar';
 
 const ResultList = () => {
@@ -35,6 +36,9 @@ const ResultList = () => {
             <AppNavbar/>
             <Container fluid>
                 <h3>Result List</h3>
+                <div className="float-end">
+                    <Button color="success" tag={Link} to="/results/new">Add Result</Button>
+                </div>
                 <Table className="mt-4">
                     <thead>
                     <tr>

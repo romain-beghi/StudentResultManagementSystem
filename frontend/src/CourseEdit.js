@@ -32,7 +32,7 @@ const CourseEdit = () => {
             body: JSON.stringify(course)
         });
         setCourse(initialFormState);
-        navigate('/courses/new');
+        navigate('/courses/');
     }
 
     const title = <h2>Add Course</h2>;

@@ -69,7 +69,7 @@ const ResultEdit = () => {
             body: JSON.stringify(result)
         });
         setResult(initialFormState);
-        navigate('/results/new');
+        navigate('/results/');
     }
 
     const title = <h2>Add Result</h2>;
