@@ -35,8 +35,8 @@ public class ResultService {
     @Transactional
     public void createResult(final ResultRequest resultRequest) {
         final Result result = new Result();
-        result.setCourse(courseService.getCourse(resultRequest.getCourseId()));
-        result.setStudent(studentService.getStudent(resultRequest.getStudentId()));
+        result.setCourse(courseService.getCourse(resultRequest.getCourse()));
+        result.setStudent(studentService.getStudent(resultRequest.getStudent()));
         result.setGrade(resultRequest.getGrade());
 
         resultRepository.save(result);

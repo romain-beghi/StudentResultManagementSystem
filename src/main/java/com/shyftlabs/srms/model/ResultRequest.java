@@ -10,10 +10,10 @@ import java.util.UUID;
 public class ResultRequest {
 
     @NotNull
-    private UUID courseId;
+    private UUID course;
 
     @NotNull
-    private UUID studentId;
+    private UUID student;
 
     @NotNull
     private Grade grade;
