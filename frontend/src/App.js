@@ -7,6 +7,7 @@ import StudentEdit from './StudentEdit';
 import CourseList from './CourseList';
 import CourseEdit from './CourseEdit';
 import ResultList from "./ResultList";
+import ResultEdit from "./ResultEdit";
 
 const App = () => {
     return (
@@ -18,6 +19,7 @@ const App = () => {
                 <Route path='/courses' exact={true} element={<CourseList/>}/>
                 <Route path='/courses/:id' element={<CourseEdit/>}/>
                 <Route path='/results' exact={true} element={<ResultList/>}/>
+                <Route path='/results/:id' element={<ResultEdit/>}/>
             </Routes>
         </Router>
     )

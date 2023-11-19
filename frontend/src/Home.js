@@ -20,7 +20,9 @@ const Home = () => {
             <Container fluid>
                 <Button color="link"><Link to="/courses">Course list</Link></Button>
             </Container>
-            {/*Add New Results*/}
+            <Container fluid>
+                <Button color="link"><Link to="/results/new">Add New Results</Link></Button>
+            </Container>
             <Container fluid>
                 <Button color="link"><Link to="/results">Results list</Link></Button>
             </Container>
