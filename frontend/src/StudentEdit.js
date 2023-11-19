@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Container, Form, FormGroup, Input, Label} from 'reactstrap';
-import {Link, useNavigate, useParams} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import AppNavbar from './AppNavbar';
 
 const StudentEdit = () => {
@@ -15,11 +15,6 @@ const StudentEdit = () => {
     const { id } = useParams();
 
     useEffect(() => {
-        if (id !== 'new') {
-            fetch(`/srms-api/v1/students/${id}`)
-                .then(response => response.json())
-                .then(data => setStudent(data));
-        }
     }, [id, setStudent]);
 
     const handleChange = (event) => {
@@ -32,7 +27,7 @@ const StudentEdit = () => {
         event.preventDefault();
 
         await fetch(`/srms-api/v1/students/${student.id ? `${student.id}` : ''}`, {
-            method: (student.id) ? 'PUT' : 'POST',
+            method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -40,10 +35,10 @@ const StudentEdit = () => {
             body: JSON.stringify(student)
         });
         setStudent(initialFormState);
-        navigate('/students');
+        navigate('/students/new');
     }
 
-    const title = <h2>{student.id ? 'Edit Student' : 'Add Student'}</h2>;
+    const title = <h2>Add Student</h2>;
 
     return (<div>
             <AppNavbar/>
@@ -71,8 +66,7 @@ const StudentEdit = () => {
                                onChange={handleChange} autoComplete="email"/>
                     </FormGroup>
                     <FormGroup>
-                        <Button color="primary" type="submit">Save</Button>{' '}
-                        <Button color="secondary" tag={Link} to="/students">Cancel</Button>
+                        <Button color="primary" type="submit">Submit</Button>{' '}
                     </FormGroup>
                 </Form>
             </Container>
