@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Container, Form, FormGroup, Input, Label} from 'reactstrap';
+import {Button, Container, Form, FormGroup, Label} from 'reactstrap';
 import {useNavigate, useParams} from 'react-router-dom';
 import AppNavbar from './AppNavbar';
 import {Select, SelectCourse, SelectStudent} from "./components/Select";
@@ -8,7 +8,7 @@ const ResultEdit = () => {
     const initialFormState = {
         course: '',
         student: '',
-        grade: ''
+        grade: 'A'
     };
 
     const [courses, setCourses] = useState([]);
@@ -26,18 +26,26 @@ const ResultEdit = () => {
 
         fetch('/srms-api/v1/courses/')
             .then(response => response.json())
-            .then(data => {
-                setCourses(data);
+            .then(dataCourse => {
+                setCourses(dataCourse);
                 setLoadingCourse(false);
+
+                if (dataCourse.length > 0 && result.course === '') {
+                    result.course = dataCourse[0].id;
+                }
             })
 
         fetch('/srms-api/v1/students/')
             .then(response => response.json())
-            .then(data => {
-                setStudents(data);
+            .then(dataStudent => {
+                setStudents(dataStudent);
                 setLoadingStudent(false);
+
+                if (dataStudent.length > 0 && result.student === '') {
+                    result.student = dataStudent[0].id;
+                }
             })
-    }, [id, setResult]);
+    }, []);
 
     if (loadingCourse || loadingStudent) {
         return <p>Loading...</p>;
@@ -104,11 +112,6 @@ const ResultEdit = () => {
                             ]}
                             onChange={handleChange}
                         />
-                    </FormGroup>
-                    <FormGroup>
-                        <Label for="grade">Grade</Label>
-                        <Input type="text" name="grade" id="grade" value={result.grade || ''}
-                               onChange={handleChange} autoComplete="grade"/>
                     </FormGroup>
                     <FormGroup>
                         <Button color="primary" type="submit">Submit</Button>{' '}
