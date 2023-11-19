@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Button, Container, Form, FormGroup, Input, Label} from 'reactstrap';
 import {useNavigate, useParams} from 'react-router-dom';
 import AppNavbar from './AppNavbar';
-import {Select} from "./components/Select";
+import {Select, SelectCourse, SelectStudent} from "./components/Select";
 
 const ResultEdit = () => {
     const initialFormState = {
@@ -10,12 +10,38 @@ const ResultEdit = () => {
         student: '',
         grade: ''
     };
+
+    const [courses, setCourses] = useState([]);
+    const [students, setStudents] = useState([]);
+    const [loadingCourse, setLoadingCourse] = useState(false);
+    const [loadingStudent, setLoadingStudent] = useState(false);
+
     const [result, setResult] = useState(initialFormState);
     const navigate = useNavigate();
     const { id } = useParams();
 
     useEffect(() => {
+        setLoadingCourse(true);
+        setLoadingStudent(true);
+
+        fetch('/srms-api/v1/courses/')
+            .then(response => response.json())
+            .then(data => {
+                setCourses(data);
+                setLoadingCourse(false);
+            })
+
+        fetch('/srms-api/v1/students/')
+            .then(response => response.json())
+            .then(data => {
+                setStudents(data);
+                setLoadingStudent(false);
+            })
     }, [id, setResult]);
+
+    if (loadingCourse || loadingStudent) {
+        return <p>Loading...</p>;
+    }
 
     const handleChange = (event) => {
         const { name, value } = event.target
@@ -48,24 +74,18 @@ const ResultEdit = () => {
                     <FormGroup>
                         <Label for="course">Course</Label>
                         <br/>
-                        <Select
+                        <SelectCourse
                             name="course"
-                            options={[
-                                { label: 'Database Management', value: '39c59b8c-439e-4d90-8f5a-ddc65b61a7cf' },
-                                { label: 'Web Application Scripting', value: '964b48c9-e33b-4529-95e5-0aa95b00e20a' }
-                            ]}
+                            options={courses}
                             onChange={handleChange}
                         />
                     </FormGroup>
                     <FormGroup>
                         <Label for="student">Student</Label>
                         <br/>
-                        <Select
+                        <SelectStudent
                             name="student"
-                            options={[
-                                { label: 'John Doe', value: '3d321c52-300b-4b51-90ec-2456f077a672' },
-                                { label: 'Isabella Reinger', value: '3cc043a3-ea54-466d-b937-15d779274606' }
-                            ]}
+                            options={students}
                             onChange={handleChange}
                         />
                     </FormGroup>
