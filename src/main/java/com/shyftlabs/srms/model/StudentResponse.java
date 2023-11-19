@@ -12,7 +12,9 @@ public class StudentResponse {
 
     private UUID id;
 
-    private String name;
+    private String firstName;
+
+    private String familyName;
 
     private LocalDate dateOfBirth;
 
