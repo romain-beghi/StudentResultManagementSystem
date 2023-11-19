@@ -14,9 +14,12 @@ const Home = () => {
             <Container fluid>
                 <Button color="link"><Link to="/students">Student list</Link></Button>
             </Container>
-
-            {/*Add New Courses*/}
-            {/*Courses List*/}
+            <Container fluid>
+                <Button color="link"><Link to="/courses/new">Add New Courses</Link></Button>
+            </Container>
+            <Container fluid>
+                <Button color="link"><Link to="/courses">Course list</Link></Button>
+            </Container>
             {/*Add New Results*/}
             {/*Results List*/}
 
