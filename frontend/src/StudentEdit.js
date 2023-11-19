@@ -56,7 +56,7 @@ const StudentEdit = () => {
                                onChange={handleChange} autoComplete="familyName"/>
                     </FormGroup>
                     <FormGroup>
-                        <Label for="dateOfBirth">Date of Birth</Label>
+                        <Label for="dateOfBirth">Date of Birth (YYYY-MM-DD)</Label>
                         <Input type="text" name="dateOfBirth" id="dateOfBirth" value={student.dateOfBirth || ''}
                                onChange={handleChange} autoComplete="dateOfBirth"/>
                     </FormGroup>
