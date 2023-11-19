@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {Button, ButtonGroup, Container, Table} from 'reactstrap';
-import {Link} from 'react-router-dom';
 import AppNavbar from './AppNavbar';
 
 const StudentList = () => {
@@ -44,7 +43,6 @@ const StudentList = () => {
             <td>{student.email}</td>
             <td>
                 <ButtonGroup>
-                    <Button size="sm" color="primary" tag={Link} to={"/students/" + student.id}>Edit</Button>
                     <Button size="sm" color="danger" onClick={() => remove(student.id)}>Delete</Button>
                 </ButtonGroup>
             </td>
@@ -55,9 +53,6 @@ const StudentList = () => {
         <div>
             <AppNavbar/>
             <Container fluid>
-                <div className="float-end">
-                    <Button color="success" tag={Link} to="/students/new">Add Student</Button>
-                </div>
                 <h3>Student List</h3>
                 <Table className="mt-4">
                     <thead>
