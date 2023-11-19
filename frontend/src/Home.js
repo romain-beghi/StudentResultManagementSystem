@@ -21,8 +21,9 @@ const Home = () => {
                 <Button color="link"><Link to="/courses">Course list</Link></Button>
             </Container>
             {/*Add New Results*/}
-            {/*Results List*/}
-
+            <Container fluid>
+                <Button color="link"><Link to="/results">Results list</Link></Button>
+            </Container>
         </div>
     );
 }
